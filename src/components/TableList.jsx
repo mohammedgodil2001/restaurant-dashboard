@@ -1,11 +1,22 @@
 import Table from "./Table";
 
-const TableList = ({tables}) => {
-    {tables.map((table) => (
-        <Table
-          number={table.id}
-        />
-      ))}
+const TableList = ({tables, setId}) => {
+    function abc (id) {
+        setId(id)
+    }
+    return (
+        <ul>
+            {tables.map((table) => {
+                return (
+                    <Table
+                        key={table.id}
+                        number={table.id}
+                        click={abc}
+                    />
+                );
+            })}
+        </ul>
+    )
     
   };
   

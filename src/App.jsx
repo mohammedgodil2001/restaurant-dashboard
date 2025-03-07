@@ -1,8 +1,11 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import TableList from './components/TableList';
+import TableDetails from './components/TableDetails';
 
 function App() {
+
+  const [id, setId] = useState(1)
 
   const tables = [
     { id: 1 },
@@ -14,7 +17,8 @@ function App() {
   
   return (
     <>
-      <TableList tables={tables}/>
+      <TableList tables={tables} setId={setId}/>
+      <TableDetails id={id} />
     </>
   )
 }

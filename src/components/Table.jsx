@@ -1,9 +1,9 @@
-const Table = ({number}) => {
+const Table = ({number, click}) => {
     return (
-      <article>
-        <h2>table {number}</h2>
+      <li onClick={() => click(number)}>
+        <p>table {number}</p>
         <p>Available</p>
-      </article>
+      </li>
     );
   };
   
