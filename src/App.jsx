@@ -2,10 +2,30 @@ import { useState } from 'react'
 import './App.css'
 import TableList from './components/TableList';
 import TableDetails from './components/TableDetails';
+import menuItems from './menuData';
+
+
 
 function App() {
 
-  const [id, setId] = useState(1)
+  const [id, setId] = useState(null)
+  const [customerCounts, setCustomerCounts] = useState({}); 
+
+  function incrementCustomer(tableId) {
+    setCustomerCounts((prev) => ({
+      ...prev,
+      [tableId]: (prev[tableId] || 0) + 1, 
+    }));
+  }
+
+  function decreaseCustomer(tableId) {
+    setCustomerCounts((prev) => ({
+      ...prev,
+      [tableId]: (prev[tableId] || 0)>0? (prev[tableId]-1): 0, 
+    }));
+  }
+
+ 
 
   const tables = [
     { id: 1 },
@@ -18,7 +38,15 @@ function App() {
   return (
     <>
       <TableList tables={tables} setId={setId}/>
-      <TableDetails id={id} />
+      {id && (
+        <TableDetails
+          id={id}
+          customerCount={customerCounts[id] || 0}
+          increment={() => incrementCustomer(id)}
+          decrement={()=> decreaseCustomer(id)}
+        />
+
+      )}
     </>
   )
 }

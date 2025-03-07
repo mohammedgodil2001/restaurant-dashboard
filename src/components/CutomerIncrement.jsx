@@ -1,16 +1,12 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 
-const Customer = () => {
-    const [count,setCount] = useState(0)
-
-    function increment(){
-        setCount(count+1)
-    }
+const Customer = ({customerCount, increment, decrement}) => {
+   
     return (
       <div>
         <button onClick={increment}>+</button>
-        <p >{count}</p>
-        <button>-</button>
+        <p >{customerCount}</p>
+        <button onClick={decrement}>-</button>
       </div>
     );
   };
