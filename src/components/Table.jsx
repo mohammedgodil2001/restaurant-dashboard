@@ -1,8 +1,8 @@
-const Table = ({number, click}) => {
+const Table = ({number, click, status}) => {
     return (
       <li onClick={() => click(number)}>
         <p>table {number}</p>
-        <p>Available</p>
+        <p>{status}</p>
       </li>
     );
   };

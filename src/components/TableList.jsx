@@ -12,6 +12,7 @@ const TableList = ({tables, setId}) => {
                         key={table.id}
                         number={table.id}
                         click={abc}
+                        status={table.status}
                     />
                 );
             })}

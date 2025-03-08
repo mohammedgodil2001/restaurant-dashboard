@@ -4,6 +4,7 @@ import TableList from './components/TableList';
 import TableDetails from './components/TableDetails';
 import menuItems from './menuData';
 import Menu from './components/menu';
+import Summary from './components/OrderSummary';
 
 
 
@@ -48,11 +49,11 @@ function App() {
  
 
   const tables = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
+    { id: 1 , status : 'available'},
+    { id: 2 , status : 'available'},
+    { id: 3 , status : 'available'},
+    { id: 4 , status : 'available'},
+    { id: 5 , status : 'available'},
   ];
   
   return (
@@ -67,6 +68,7 @@ function App() {
           decrement={()=> decreaseCustomer(id)}
         />
         <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} />
+        <Summary item={menu[id]}/>
         </>
       )}
     </>
