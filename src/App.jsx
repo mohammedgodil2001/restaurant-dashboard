@@ -5,6 +5,7 @@ import TableDetails from './components/TableDetails';
 import menuItems from './menuData';
 import Menu from './components/menu';
 import Summary from './components/OrderSummary';
+import PaidButton from './components/PaidButton';
 
 
 
@@ -121,6 +122,7 @@ function App() {
         />
         <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
         <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)}/>
+        <PaidButton item={menu[id]}/>
         </>
       )}
     </>
