@@ -14,6 +14,15 @@ function App() {
   const [customerCounts, setCustomerCounts] = useState({}); 
   // const [ordersummary,setOrdersummary] = useState({});
   const [menu,setMenu] = useState({});
+  const tablesing = [
+    { id: 1 , status : 'available'},
+    { id: 2 , status : 'available'},
+    { id: 3 , status : 'available'},
+    { id: 4 , status : 'available'},
+    { id: 5 , status : 'available'},
+  ];
+
+  const [tables,setTables] = useState(tablesing);
 
   function incrementMenuItem(tableId, item) {
     setMenu((prev) => {
@@ -23,7 +32,7 @@ function App() {
         ? existingOrder.map((orderItem) =>
             orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
           ) 
-        : [...existingOrder, { ...item, quantity: 1 }]; 
+        : [...existingOrder, { ...item, quantity: 1, status:"preparing" }]; 
   
       return {
         ...prev,
@@ -32,29 +41,72 @@ function App() {
     });
   }
 
+  function decrementMenuItem(tableId, item) {
+    setMenu((prev) => {
+      const existingOrder = prev[tableId] || []; 
+
+      const updatedOrder = existingOrder.map((orderItem) =>
+        orderItem.id === item.id
+          ? { ...orderItem, quantity: orderItem.quantity - 1 }
+          : orderItem
+      );
+  
+      
+      const filteredOrder = updatedOrder.filter(orderItem => orderItem.quantity > 0);
+  
+      return {
+        ...prev,
+        [tableId]: filteredOrder, 
+      };
+    });
+  }
+
   function incrementCustomer(tableId) {
-    setCustomerCounts((prev) => ({
-      ...prev,
-      [tableId]: (prev[tableId] || 0) + 1, 
-    }));
+    setCustomerCounts((prev) => {
+      const newCount = (prev[tableId] || 0) + 1; 
+  
+      if (newCount > 0) {
+        setTables((prevTables) =>
+          prevTables.map(t => (t.id === tableId ? { ...t, status: "occupied" } : t))
+        );
+      }
+    
+      return {
+        ...prev,
+        [tableId]: newCount, 
+      };
+    });
   }
 
   function decreaseCustomer(tableId) {
-    setCustomerCounts((prev) => ({
-      ...prev,
-      [tableId]: (prev[tableId] || 0)>0? (prev[tableId]-1): 0, 
-    }));
+    setCustomerCounts((prev) => {
+      const newCount = (prev[tableId] || 0) > 0 ? prev[tableId] - 1 : 0;
+    
+      if (newCount === 0) {
+        setTables((prevTables) =>
+          prevTables.map(t => (t.id === tableId ? { ...t, status: "available" } : t))
+        );
+      }
+    
+      return {
+        ...prev,
+        [tableId]: newCount,
+      };
+    });
+
   }
 
+  function changeStatus(iding) {
+    setMenu((prev) => ({
+      ...prev, 
+      [id]: prev[id].map(i => 
+        i.id === iding ? { ...i, status: "ready" } : i
+      ) 
+    }));
+  }
  
 
-  const tables = [
-    { id: 1 , status : 'available'},
-    { id: 2 , status : 'available'},
-    { id: 3 , status : 'available'},
-    { id: 4 , status : 'available'},
-    { id: 5 , status : 'available'},
-  ];
+  
   
   return (
     <>
@@ -67,8 +119,8 @@ function App() {
           increment={() => incrementCustomer(id)}
           decrement={()=> decreaseCustomer(id)}
         />
-        <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} />
-        <Summary item={menu[id]}/>
+        <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+        <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)}/>
         </>
       )}
     </>

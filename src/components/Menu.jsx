@@ -1,8 +1,9 @@
-const Menu = ({ menuItems, incrementMenuItem, menu }) => {
+const Menu = ({ menuItems, incrementMenuItem, menu, decrementMenuItem }) => {
     return (
       <ul>
         {menuItems.map((item) => {
           const orderedItem = menu.find((order) => order.id === item.id) || { quantity: 0 };
+        
   
           return (
             <li key={item.id}>
@@ -10,7 +11,8 @@ const Menu = ({ menuItems, incrementMenuItem, menu }) => {
               <p>{item.name}</p>
               <button onClick={() => incrementMenuItem(item)}>+</button>
               <p>{orderedItem.quantity}</p>
-              <button>-</button>
+              <button  onClick={() => decrementMenuItem(item)}>-</button>
+              
             </li>
           );
         })}

@@ -1,5 +1,6 @@
-const Summary = ({item}) => {
+const Summary = ({item, changeStatus}) => {
     console.log('summary',item)
+
     let total = 0
     item?.map((i) => (
         total += i.price * i.quantity
@@ -12,6 +13,8 @@ const Summary = ({item}) => {
                         <p>{i.name}</p>
                         <p>{i.quantity}</p>
                         <p>{i.price}</p>
+                        <p>{i.status}</p>
+                        <button onClick={() => changeStatus(i.id)}>mark as ready</button>
                     </li>
                 ))}
             </ul>
