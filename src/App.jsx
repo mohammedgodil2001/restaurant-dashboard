@@ -22,8 +22,8 @@ function App() {
     { id: 4 , status : 'available'},
     { id: 5 , status : 'available'},
   ];
-
   const [tables,setTables] = useState(tablesing);
+  const [isConfirming, setIsConfirming] = useState(null);
 
   function incrementMenuItem(tableId, item) {
     setMenu((prev) => {
@@ -106,12 +106,30 @@ function App() {
     }));
   }
  
-
+  function confirmingState(){
+    setIsConfirming(id)
+  }
   
+  function reset(){
+    setCustomerCounts((counts) => ({
+      ...counts,
+      [id] : 0
+    }))
+    setMenu((menuing) => ({
+      ...menuing,
+      [id] : []
+    }))
+    setTables((prev) => 
+      prev.map(table => 
+        table.id === id ? { ...table, status: "available" } : table
+      )
+    );
+    setIsConfirming(null)
+  }
   
   return (
     <>
-      <TableList tables={tables} setId={setId}/>
+      <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}/>
       {id && (
         <>
         <TableDetails
@@ -122,7 +140,7 @@ function App() {
         />
         <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
         <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)}/>
-        <PaidButton item={menu[id]}/>
+        <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset}/>
         </>
       )}
     </>

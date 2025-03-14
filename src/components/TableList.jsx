@@ -1,9 +1,11 @@
 import Table from "./Table"
 
-const TableList = ({tables, setId}) => {
+const TableList = ({tables, setId, setIsConfirming}) => {
     function abc (id) {
         setId(id)
+        setIsConfirming(null)
     }
+    
     return (
         <ul>
             {tables.map((table) => {
