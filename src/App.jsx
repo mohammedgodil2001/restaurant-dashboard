@@ -44,7 +44,10 @@ function App() {
     setMenu((prev) => {
       const existingOrder = prev[tableId] || []; 
 
-      if (customerCounts[tableId] === 0) return prev;
+      // if (customerCounts[tableId] === 0) {
+      //   console.log(customerCounts[tableId])
+      //   return prev
+      // };
   
       const updatedOrder = existingOrder.find((orderItem) => orderItem.id === item.id)
         ? existingOrder.map((orderItem) =>
@@ -54,7 +57,7 @@ function App() {
   
       return {
         ...prev,
-        [tableId]: updatedOrder, 
+        [tableId]: customerCounts[tableId] > 0 ? updatedOrder : [], 
       };
     });
   }
@@ -166,24 +169,44 @@ function App() {
   }, [menu, id]); 
 
   return (
-    <>
-      <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}  />
-      {id && (
-        <>
-        <TableDetails
-          id={id}
-          customerCount={customerCounts[id] || 0}
-          increment={() => incrementCustomer(id)}
-          decrement={()=> decreaseCustomer(id)}
-        />
-        <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
-        <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-        <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
-        <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
-        <Prepitems item={menu}/>
-        </>
-      )}
-    </>
+    // <main>
+    //   <section>
+    //     <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}  />
+    //     {id && (
+    //       <>
+    //       <TableDetails
+    //         id={id}
+    //         customerCount={customerCounts[id] || 0}
+    //         increment={() => incrementCustomer(id)}
+    //         decrement={()=> decreaseCustomer(id)}
+    //       />
+    //       <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
+    //       <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+    //       <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+    //       <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
+    //       <Prepitems item={menu}/>
+    //       </>
+    //     )}
+    //   </section>
+    // </main>
+    <main className="container">
+      <section className="tables-section">
+        <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming} />
+      </section>
+
+      <section className="details-section">
+        {id && (
+          <>
+            <TableDetails id={id} customerCount={customerCounts[id] || 0} increment={() => incrementCustomer(id)} decrement={() => decreaseCustomer(id)} />
+            <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
+            <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+            <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+            <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
+            <Prepitems item={menu}/>
+          </>
+        )}
+      </section>
+    </main>
   )
 }
 

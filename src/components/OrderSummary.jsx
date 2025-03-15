@@ -1,5 +1,5 @@
 const Summary = ({item, changeStatus, clicked}) => {
-    console.log('summary',item)
+    // console.log('summary',item)
 
     let total = 0
     let totaling;
@@ -23,10 +23,14 @@ const Summary = ({item, changeStatus, clicked}) => {
                     </li>
                 ))}
             </ul>
-            <p>
-                {clicked ? <span>total vlaue: {totaling}</span> : ""}
-               {clicked ? 'bill after discount' : 'total'} : {total} 
-            </p>
+            <div>
+            {item?.length > 0 && (
+            <>
+                {clicked && <span>Total before discount: {totaling}</span>}
+                <p>{clicked ? 'Bill after discount' : 'Total'}: {total}</p>
+            </>
+            )}1
+            </div>
         </>
     )
   };

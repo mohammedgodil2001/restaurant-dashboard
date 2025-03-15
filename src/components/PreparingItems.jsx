@@ -4,7 +4,7 @@ const Prepitems = ({item}) => {
           .filter(item => item.status === "preparing") 
           .map(item => ({ ...item, tableId })) 
       );
-    console.log(preparingItems)
+    // console.log(preparingItems)
     return(
         <ul>
             {preparingItems.map(item => (
