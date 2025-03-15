@@ -10,7 +10,7 @@
 //   export default PaidButton;
 // import { useState } from "react";
 
-const PaidButton = ({ item , isConfirming , confirmingState, reset}) => {
+const PaidButton = ({ item , isConfirming , confirmingState, reset, cancel}) => {
     const disable = !item || !item.length || item.some(i => i.status === 'preparing');
     // const [isConfirming, setIsConfirming] = useState(false);
   
@@ -23,7 +23,7 @@ const PaidButton = ({ item , isConfirming , confirmingState, reset}) => {
                 Are you sure you want to finalize and reset this table?
                 </p>
                 <button onClick={reset}>confirm</button>
-                <button>cancel</button>
+                <button onClick={cancel}>cancel</button>
             </div>
         </>
     );

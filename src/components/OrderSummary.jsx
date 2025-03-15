@@ -1,10 +1,15 @@
-const Summary = ({item, changeStatus}) => {
+const Summary = ({item, changeStatus, clicked}) => {
     console.log('summary',item)
 
     let total = 0
-    item?.map((i) => (
-        total += i.price * i.quantity
-    ))
+    let totaling;
+    item?.forEach((i) => {
+        total += i.price * i.quantity;
+    });
+    if (clicked) {
+        totaling = total
+        total -= total * 0.1;
+    }
     return(
         <>
             <ul>
@@ -19,7 +24,8 @@ const Summary = ({item, changeStatus}) => {
                 ))}
             </ul>
             <p>
-               total : {total} 
+                {clicked ? <span>total vlaue: {totaling}</span> : ""}
+               {clicked ? 'bill after discount' : 'total'} : {total} 
             </p>
         </>
     )

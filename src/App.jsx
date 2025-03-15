@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import TableList from './components/TableList';
 import TableDetails from './components/TableDetails';
@@ -6,6 +6,8 @@ import menuItems from './menuData';
 import Menu from './components/menu';
 import Summary from './components/OrderSummary';
 import PaidButton from './components/PaidButton';
+import Prepitems from './components/PreparingItems';
+import Checkbox from './components/Checkbox'
 
 
 
@@ -15,6 +17,7 @@ function App() {
   const [customerCounts, setCustomerCounts] = useState({}); 
   // const [ordersummary,setOrdersummary] = useState({});
   const [menu,setMenu] = useState({});
+  const [clicked,setClicked] = useState({});
   const tablesing = [
     { id: 1 , status : 'available'},
     { id: 2 , status : 'available'},
@@ -24,10 +27,24 @@ function App() {
   ];
   const [tables,setTables] = useState(tablesing);
   const [isConfirming, setIsConfirming] = useState(null);
+  
+
+  function checkboxClicked (e){
+    setClicked((prev) => {
+      return{
+        ...prev,
+        [id]: e.target.checked
+      }
+    })
+  }
+
+  
 
   function incrementMenuItem(tableId, item) {
     setMenu((prev) => {
       const existingOrder = prev[tableId] || []; 
+
+      if (customerCounts[tableId] === 0) return prev;
   
       const updatedOrder = existingOrder.find((orderItem) => orderItem.id === item.id)
         ? existingOrder.map((orderItem) =>
@@ -127,9 +144,30 @@ function App() {
     setIsConfirming(null)
   }
   
+  function cancel (){
+    setIsConfirming(null)
+  }
+  
+  useEffect(() => {
+    const currenItem = menu[id] || [];
+    const currentCustomer = customerCounts[id]
+  
+    if (currenItem.length > 0 && currentCustomer > 0) {
+      const hasPreparingItems = currenItem.some(item => item.status === 'preparing');
+  
+      setTables((tables) =>
+        tables.map((table) =>
+          table.id === id
+            ? { ...table, status: hasPreparingItems  ? "occupied" : "waiting for bill" }
+            : table
+        )
+      );
+    }
+  }, [menu, id]); 
+
   return (
     <>
-      <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}/>
+      <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}  />
       {id && (
         <>
         <TableDetails
@@ -138,9 +176,11 @@ function App() {
           increment={() => incrementCustomer(id)}
           decrement={()=> decreaseCustomer(id)}
         />
+        <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
         <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-        <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)}/>
-        <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset}/>
+        <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+        <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
+        <Prepitems item={menu}/>
         </>
       )}
     </>
