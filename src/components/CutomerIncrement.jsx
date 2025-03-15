@@ -3,10 +3,10 @@
 const Customer = ({customerCount, increment, decrement}) => {
    
     return (
-      <div>
-        <button onClick={increment}>+</button>
+      <div className="customer_incremental">
+        <button onClick={increment} className="increment_button">+</button>
         <p >{customerCount}</p>
-        <button onClick={decrement}>-</button>
+        <button onClick={decrement} className="decremental_button"><span>-</span></button>
       </div>
     );
   };

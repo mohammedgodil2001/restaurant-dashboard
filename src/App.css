@@ -55,7 +55,7 @@ body{
 }
 
 .tables-section {
-  width: 30%;  
+  width: 45%;  
 }
 
 .details-section {
@@ -83,6 +83,33 @@ body{
   position: relative;
 }
 
+.tablenumber{
+  display: inline-flex;
+  background-color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tablenumber span{
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.table_container{
+  display: inline-flex;
+  background-color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  gap: 0.8rem;
+  box-sizing: border-box;
+}
+
+.table_container img{
+  width: 50px;
+}
 
 .table-number {
   margin: 0;
@@ -95,15 +122,22 @@ body{
 
 
 .table-status {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.table-status span{
+  position: absolute;
+  bottom: 0.5rem;
+  left: 1rem;
 }
 
 .table-status img{
   position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
@@ -117,9 +151,9 @@ body{
   border-radius: 5px;
 }
 
-/* .occupied .table-status img {
+.occupied .table-status img {
   display: none;
-} */
+}
 
 .waiting-for-bill {
   
@@ -127,4 +161,49 @@ body{
 
 .closed_food_plate{
   width: 50%;
+}
+
+.customer_parent{
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid; */
+  justify-content: center;
+  align-items: self-start;
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+}
+
+.customer_parent span{
+  font-weight: 500;
+}
+
+
+.customer_incremental{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.customer_and_table_details{
+  display: flex;
+  gap: 1rem;
+}
+
+
+.increment_button, .decremental_button{
+  border-radius: 50%;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 2.5rem;
+  font-weight: 300;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.decremental_button span{
+  margin-top: -2px;
 }
