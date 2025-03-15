@@ -169,44 +169,51 @@ function App() {
   }, [menu, id]); 
 
   return (
-    // <main>
-    //   <section>
-    //     <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}  />
-    //     {id && (
-    //       <>
-    //       <TableDetails
-    //         id={id}
-    //         customerCount={customerCounts[id] || 0}
-    //         increment={() => incrementCustomer(id)}
-    //         decrement={()=> decreaseCustomer(id)}
-    //       />
-    //       <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
-    //       <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-    //       <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
-    //       <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
-    //       <Prepitems item={menu}/>
-    //       </>
-    //     )}
-    //   </section>
-    // </main>
     <main className="container">
       <section className="tables-section">
-        <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming} />
+        <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming} customerCount={customerCounts} />
       </section>
 
+    
       <section className="details-section">
         {id && (
           <>
-            <TableDetails id={id} customerCount={customerCounts[id] || 0} increment={() => incrementCustomer(id)} decrement={() => decreaseCustomer(id)} />
-            <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
-            <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-            <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
-            <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
-            <Prepitems item={menu}/>
+          <TableDetails
+            id={id}
+            customerCount={customerCounts[id] || 0}
+            increment={() => incrementCustomer(id)}
+            decrement={()=> decreaseCustomer(id)}
+          />
+          <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
+          <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+          <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+          <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
+          <Prepitems item={menu}/>
           </>
         )}
       </section>
     </main>
+  //   <main>
+  //   <section>
+  //     <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}  />
+  //     {id && (
+  //       <>
+  //       <TableDetails
+  //         id={id}
+  //         customerCount={customerCounts[id] || 0}
+  //         increment={() => incrementCustomer(id)}
+  //         decrement={()=> decreaseCustomer(id)}
+  //       />
+  //       <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
+  //       <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+  //       <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+  //       <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
+  //       <Prepitems item={menu}/>
+  //       </>
+  //     )}
+  //   </section>
+  // </main>
+   
   )
 }
 

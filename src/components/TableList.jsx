@@ -1,6 +1,6 @@
 import Table from "./Table"
 
-const TableList = ({tables, setId, setIsConfirming}) => {
+const TableList = ({tables, setId, setIsConfirming, customerCount}) => {
     function abc (id) {
         setId(id)
         setIsConfirming(null)
@@ -8,7 +8,7 @@ const TableList = ({tables, setId, setIsConfirming}) => {
     }
     
     return (
-        <ul>
+        <ul className="table-list">
             {tables.map((table) => {
                 return (
                     <Table
@@ -16,6 +16,7 @@ const TableList = ({tables, setId, setIsConfirming}) => {
                         number={table.id}
                         click={abc}
                         status={table.status}
+                        customerCount={customerCount ? customerCount[table.id] : 0}
                     />
                 );
             })}

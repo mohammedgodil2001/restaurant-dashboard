@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+  background-color: #F3F5F7;
+  font-family: "Montserrat", sans-serif;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +46,85 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+.container {
+  display: flex;
+  gap: 20px; 
+}
+
+.tables-section {
+  width: 30%;  
+}
+
+.details-section {
+  width: 70%; 
+}
+
+
+
+.table-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+
+.table-item {
+  width: 150px;
+  height: 150px;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+.table-number {
+  margin: 0;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  font-weight: bold;
+}
+
+
+.table-status {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.table-status img{
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.available {
+  
+}
+
+.occupied {
+  background-color: transparent;
+  border: 2px dotted gray;
+  border-radius: 5px;
+}
+
+/* .occupied .table-status img {
+  display: none;
+} */
+
+.waiting-for-bill {
+  
+}
+
+.closed_food_plate{
+  width: 50%;
 }

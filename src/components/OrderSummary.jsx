@@ -29,7 +29,7 @@ const Summary = ({item, changeStatus, clicked}) => {
                 {clicked && <span>Total before discount: {totaling}</span>}
                 <p>{clicked ? 'Bill after discount' : 'Total'}: {total}</p>
             </>
-            )}1
+            )}
             </div>
         </>
     )
