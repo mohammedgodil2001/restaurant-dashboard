@@ -8,7 +8,7 @@ body{
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding-top: 2rem;
   text-align: center;
 }
 
@@ -59,7 +59,7 @@ body{
 }
 
 .details-section {
-  width: 70%; 
+  width: 100%; 
 }
 
 
@@ -183,11 +183,35 @@ body{
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: 3rem;
+  background-color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.customer-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.customer-actions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .customer_and_table_details{
   display: flex;
   gap: 1rem;
+}
+
+.customer-count{
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 
@@ -206,4 +230,22 @@ body{
 
 .decremental_button span{
   margin-top: -2px;
+}
+
+
+.special-occasion{
+  display: flex;
+}
+
+.special-occasion img{
+  width: 50px;
+}
+
+
+.special-occasion-label{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: self-start;
+  text-align: left;
 }

@@ -1,7 +1,8 @@
 import Customer from "./CutomerIncrement";
 import table from '../assets/table.svg'
+import Checkbox from "./Checkbox";
 
-const TableDetails = ({id,customerCount, increment, decrement}) => {
+const TableDetails = ({id,customerCount, increment, decrement, checkboxClicked, clicked}) => {
     return (
       <article className="customer_and_table_details">
         <div className="table_container">
@@ -14,6 +15,7 @@ const TableDetails = ({id,customerCount, increment, decrement}) => {
             </div>
         </div>
         <Customer customerCount={customerCount} increment={increment} decrement={decrement} />
+        <Checkbox clicked={clicked} checkboxClicked={checkboxClicked} />
       </article>
     );
   };

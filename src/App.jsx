@@ -183,8 +183,10 @@ function App() {
             customerCount={customerCounts[id] || 0}
             increment={() => incrementCustomer(id)}
             decrement={()=> decreaseCustomer(id)}
+            checkboxClicked={(e) => checkboxClicked(e)}
+            clicked={clicked[id] || false}
           />
-          <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
+          {/* <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/> */}
           <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
           <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
           <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
