@@ -11,27 +11,31 @@ const Summary = ({item, changeStatus, clicked}) => {
         total -= total * 0.1;
     }
     return(
-        <>
-            <ul>
+        <section className="order-summary">
+            <ul className="summary-list">
                 {item?.map((i) =>(
-                    <li key={i.id}>
-                        <p>{i.name}</p>
-                        <p>{i.quantity}</p>
-                        <p>{i.price}</p>
-                        <p>{i.status}</p>
-                        <button onClick={() => changeStatus(i.id)}>mark as ready</button>
+                    <li className="summary-list_item" key={i.id}>
+                        <div className="dish-info">
+                            <p className="dish_name">{i.name}</p>
+                            <p className="dish_status">{i.status + "..."}</p>
+                            <p className="dish_quantity">{i.quantity}</p>
+                        </div>
+                        <div className="dish-price">
+                            <p>€ {i.price}</p>
+                            <button  onClick={() => changeStatus(i.id)}>{i.status === "preparing" ? "Ready" : "Served"}</button>
+                        </div>
                     </li>
                 ))}
             </ul>
             <div>
             {item?.length > 0 && (
-            <>
-                {clicked && <span>Total before discount: {totaling}</span>}
-                <p>{clicked ? 'Bill after discount' : 'Total'}: {total}</p>
-            </>
+            <div className="pricing-summary">
+                {clicked && <p className="total-before-discount">Total before discount: {totaling}</p>}
+                <p className="final-total">{clicked ? 'Bill after discount' : 'Total'}: {total}</p>
+            </div>
             )}
             </div>
-        </>
+        </section>
     )
   };
   

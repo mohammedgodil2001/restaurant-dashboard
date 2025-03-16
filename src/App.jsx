@@ -187,35 +187,19 @@ function App() {
             clicked={clicked[id] || false}
           />
           {/* <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/> */}
-          <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-          <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+          <section className="order-container">
+            <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+            <section className="summary-prep-container">
+              <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
+              <Prepitems item={menu}/>
+            </section>
+          </section>
           <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
-          <Prepitems item={menu}/>
           </>
         )}
       </section>
     </main>
-  //   <main>
-  //   <section>
-  //     <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming}  />
-  //     {id && (
-  //       <>
-  //       <TableDetails
-  //         id={id}
-  //         customerCount={customerCounts[id] || 0}
-  //         increment={() => incrementCustomer(id)}
-  //         decrement={()=> decreaseCustomer(id)}
-  //       />
-  //       <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/>
-  //       <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-  //       <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
-  //       <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
-  //       <Prepitems item={menu}/>
-  //       </>
-  //     )}
-  //   </section>
-  // </main>
-   
+ 
   )
 }
 
