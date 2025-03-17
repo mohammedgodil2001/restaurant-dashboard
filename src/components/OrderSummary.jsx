@@ -17,7 +17,7 @@ const Summary = ({item, changeStatus, clicked}) => {
                     <li className="summary-list_item" key={i.id}>
                         <div className="dish-info">
                             <p className="dish_name">{i.name}</p>
-                            <p className="dish_status">{i.status + "..."}</p>
+                            <p className="dish_status">{i.status === "preparing" ? i.status + "..." : i.status}</p>
                             <p className="dish_quantity">{i.quantity}</p>
                         </div>
                         <div className="dish-price">
