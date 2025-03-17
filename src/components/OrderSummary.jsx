@@ -30,8 +30,8 @@ const Summary = ({item, changeStatus, clicked}) => {
             <div>
             {item?.length > 0 && (
             <div className="pricing-summary">
-                {clicked && <p className="total-before-discount">Total before discount: {totaling}</p>}
-                <p className="final-total">{clicked ? 'Bill after discount' : 'Total'}: {total}</p>
+                {clicked && <p className="total-before-discount">Total before discount <span>{"€ "  + totaling}</span></p>}
+                <p className="final-total">{clicked ? 'Bill after discount' : 'Total'} <span>{"€ "  +total}</span></p>
             </div>
             )}
             </div>

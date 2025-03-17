@@ -291,7 +291,22 @@ body{
   background: white; 
   position: sticky;
   bottom: 0;
-  box-shadow: 0px -1px 7px #DEDEDE; 
+  box-shadow: 0px -2px 9px #DEDEDE; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.total-before-discount, .final-total{
+  display: flex;
+  justify-content: space-between;
+  /* font-size: 0.9rem; */
+  font-weight: 500;
+}
+
+.total-before-discount span, .final-total span{
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .summary-list_item{
@@ -315,8 +330,8 @@ body{
 }
 
 .dish-price p{
-  font-weight: 600;
-  font-size: 1.15rem;
+  font-weight: 500;
+  font-size: 1.1rem;
   text-align: end;
 }
 
