@@ -1,7 +1,7 @@
 const Menu = ({ menuItems, incrementMenuItem, menu, decrementMenuItem }) => {
     return (
         <div >  
-            <span>Menu</span>
+            <span className="menu_heading">Menu</span>
             <ul className="menu-list">
                 {menuItems.map((item) => {
                 const orderedItem = menu.find((order) => order.id === item.id) || { quantity: 0 };
