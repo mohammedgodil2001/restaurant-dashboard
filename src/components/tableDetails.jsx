@@ -1,4 +1,4 @@
-import Customer from "./cutomerIncrement";
+import Customer from "./customerIncrement";
 import table from '../assets/table.svg'
 import Checkbox from "./checkbox";
 
