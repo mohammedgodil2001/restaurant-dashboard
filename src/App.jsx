@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+import './app.css'
 import TableList from './components/tableList';
 import TableDetails from './components/tableDetails';
 import menuItems from './menuData';
