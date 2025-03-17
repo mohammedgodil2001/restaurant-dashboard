@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import TableList from './components/TableList';
-import TableDetails from './components/TableDetails';
+import TableList from './components/tableList';
+import TableDetails from './components/tableDetails';
 import menuItems from './menuData';
 import Menu from './components/menu';
-import Summary from './components/OrderSummary';
-import PaidButton from './components/PaidButton';
-import Prepitems from './components/PreparingItems';
-import Checkbox from './components/Checkbox'
+import Summary from './components/orderSummary';
+import PaidButton from './components/paidButton';
+import Prepitems from './components/preparingItems';
+import Checkbox from './components/checkbox'
 
 
 

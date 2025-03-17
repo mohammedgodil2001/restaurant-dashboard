@@ -1,4 +1,4 @@
-import Table from "./Table"
+import Table from "./table"
 
 const TableList = ({tables, setId, setIsConfirming, customerCount}) => {
     function abc (id) {

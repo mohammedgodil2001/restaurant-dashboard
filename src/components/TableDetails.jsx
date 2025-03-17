@@ -1,6 +1,6 @@
-import Customer from "./CutomerIncrement";
+import Customer from "./cutomerIncrement";
 import table from '../assets/table.svg'
-import Checkbox from "./Checkbox";
+import Checkbox from "./checkbox";
 
 const TableDetails = ({id,customerCount, increment, decrement, checkboxClicked, clicked}) => {
     return (
