@@ -13,7 +13,7 @@ const Menu = ({ menuItems, incrementMenuItem, menu, decrementMenuItem }) => {
                     </div>
                     <div className="menu-text">
                         <p className="menu-name">{item.name}</p>
-                        <p className="menu-price">€{item.price}</p>
+                        <p className="menu-price">€ {item.price}</p>
                     </div>
                 </div>
 

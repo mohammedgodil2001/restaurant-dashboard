@@ -147,7 +147,7 @@ body{
 
 .occupied, .waiting-for-bill {
   background-color: transparent;
-  border: 2px dotted gray;
+  border: 2px dotted #BCBABA;
   border-radius: 5px;
 }
 
@@ -263,7 +263,7 @@ body{
   grid-template-columns: 1.3fr 1fr;
   gap: 20px;
   margin-top: 1.5rem;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .summary-prep-container {
@@ -398,4 +398,16 @@ body{
   border-radius: 5px;
   height: max-content;
   padding-bottom: 1rem;
+}
+
+.menu-name{
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.menu-image{
+  border: 1px dashed #BCBABA;
+  border-radius: 5px;
+  padding: 0.3rem;
 }
