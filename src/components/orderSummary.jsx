@@ -25,7 +25,7 @@ const Summary = ({item, changeStatus, clicked}) => {
                             </div>
                             <div className="dish-price">
                                 <p>€ {i.price}</p>
-                                <button  onClick={() => changeStatus(i.id)}>{i.status === "preparing" ? "Ready" : "Served"}</button>
+                                <button className={i.status === "preparing" ? "ready" : "served"}  onClick={() => changeStatus(i.id)}>{i.status === "preparing" ? "Ready" : "Served"}</button>
                             </div>
                         </li>
                     ))}

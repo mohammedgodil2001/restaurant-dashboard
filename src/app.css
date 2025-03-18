@@ -493,8 +493,15 @@ body{
 }
 
 .paid_button{
-  align-self: baseline;
+  /* align-self: baseline; */
 }
+
+/* .served{
+  background-image: url('./assets/pattern.svg');
+  color: black;
+  background-size: cover;
+  background-position: center
+} */
 
 .confirmation_pop_up{
   position: absolute;
@@ -532,9 +539,9 @@ body{
   text-transform: capitalize;
   background-color: black;
   color: white;
-  padding: 1rem 1.3rem;
+  padding: 1rem 1.2rem;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .paid_button:disabled {
