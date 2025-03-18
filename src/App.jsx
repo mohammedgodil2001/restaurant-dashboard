@@ -168,8 +168,17 @@ function App() {
     }
   }, [menu, id]); 
 
+
+  useEffect(() => {
+    if (isConfirming) {
+      document.body.classList.add('is-confirming');
+    } else {
+      document.body.classList.remove('is-confirming');
+    }
+  }, [isConfirming]);
+
   return (
-    <main className="container">
+    <main className={`container`}>
       <section className="tables-section">
         <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming} customerCount={customerCounts} />
       </section>
@@ -188,13 +197,15 @@ function App() {
           />
           {/* <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/> */}
           <section className="order-container">
-            <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+            <div className='menu_and_button'>
+              <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
+              <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
+            </div>
             <section className="summary-prep-container">
               <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
               <Prepitems item={menu}/>
             </section>
           </section>
-          <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
           </>
         )}
       </section>

@@ -421,9 +421,10 @@ body{
   padding: 0.5rem 1.2rem;
   padding-top: 1rem;
   border-radius: 5px;
-  height: max-content;
+  height: 400px;
   padding-bottom: 1rem;
   margin-top: 0.9rem;
+  overflow-y: auto;
 }
 
 .menu-name{
@@ -483,4 +484,88 @@ body{
 
 .item_image_and_name img{
   width: 35px;
+}
+
+.menu_and_button{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.paid_button{
+  align-self: baseline;
+}
+
+.confirmation_pop_up{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: white;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  border-radius: 5px;
+}
+
+.button_parent{
+  display: flex;
+  gap: 1.5rem;
+}
+
+.button_parent button{
+  border: 1px solid black;
+  text-shadow: none;
+  box-shadow: none;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.paid_button{
+  text-shadow: none;
+  box-shadow: none;
+  font-weight: 500;
+  text-transform: capitalize;
+  background-color: black;
+  color: white;
+  padding: 1rem 1.3rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+.paid_button:disabled {
+  background-color: #ccc; 
+  color: #888; 
+  border: 1px solid #ddd; 
+  cursor: not-allowed; 
+  opacity: 0.6; 
+}
+
+.confirm{
+  background-color: black;
+  color: white;
+}
+
+.confirmation_desc{
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+body.is-confirming {
+  position: relative;
+}
+
+body.is-confirming::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
 }
