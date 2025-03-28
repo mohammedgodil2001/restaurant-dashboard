@@ -4,7 +4,7 @@ const Prepitems = ({item}) => {
           .filter(item => item.status === "preparing") 
           .map(item => ({ ...item, tableId })) 
       );
-    // console.log(preparingItems)
+    
     return(
         <section className="orders-section">
             <h2 className="orders-by-table-heading">Orders by Table</h2>

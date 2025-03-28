@@ -1,15 +1,7 @@
 import party from '../assets/party_popper.svg'
 const Checkbox = ({checkboxClicked, clicked}) => {
    return (
-    // <>
-    //     <img src={party} alt="party" className='party'/>
-    //     <div>
-    //         <p>Special occasion discount</p>
-    //         <input type="checkbox" checked={clicked} onChange={(e) => {
-    //         checkboxClicked(e);
-    //         }} />
-    //     </div>
-    // </>
+   
     <article className="special-occasion">
         
             <img src={party} alt="Celebration icon" className="party-icon" />

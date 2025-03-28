@@ -1,5 +1,5 @@
 const Summary = ({item, changeStatus, clicked}) => {
-    // console.log('summary',item)
+    
 
     let total = 0
     let totaling;
@@ -25,7 +25,7 @@ const Summary = ({item, changeStatus, clicked}) => {
                             </div>
                             <div className="dish-price">
                                 <p>€ {i.price}</p>
-                                {/* <button className={i.status === "preparing" ? "ready" : "served"}  onClick={() => changeStatus(i.id)}>{i.status === "preparing" ? "Ready" : "Served"}</button> */}
+                                
                                 <button
                                 className={`btn_status ${i.status === "preparing" ? "ready" : "served"}`}
                                 onClick={() => changeStatus(i.id)}
