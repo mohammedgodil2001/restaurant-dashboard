@@ -188,7 +188,7 @@ function App() {
       </section>
 
       <section className="details-section">
-        
+      {id && (
           <>
             <TableDetails
               id={id}
@@ -226,7 +226,7 @@ function App() {
               </section>
             </section>
           </>
-        
+        )}
       </section>
     </main>
   );
