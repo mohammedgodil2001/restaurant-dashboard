@@ -344,7 +344,7 @@ body{
 }
 
 
-.dish-price button{
+.btn_status{
   font-weight: 400;
   border: none;
   background-color: black;
@@ -494,12 +494,11 @@ body{
 
 
 
-/* .served{
-  background-image: url('./assets/pattern.svg');
-  color: black;
-  background-size: cover;
-  background-position: center
-} */
+.served{
+  background-color: #d3d3d3;     
+  color: #555555;               
+  cursor: not-allowed;  
+}
 
 .confirmation_pop_up{
   position: absolute;

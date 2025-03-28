@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './app.css'
+import { useEffect, useState } from 'react';
+import './app.css';
 import TableList from './components/tableList';
 import TableDetails from './components/tableDetails';
 import menuItems from './menuData';
@@ -7,166 +7,165 @@ import Menu from './components/menu';
 import Summary from './components/orderSummary';
 import PaidButton from './components/paidButton';
 import Prepitems from './components/preparingItems';
-import Checkbox from './components/checkbox'
-
-
 
 function App() {
+  const [state, setState] = useState({
+    id: null,
+    customerCounts: {},
+    menu: {},
+    clicked: {},
+    tables: [
+      { id: 1, status: 'available' },
+      { id: 2, status: 'available' },
+      { id: 3, status: 'available' },
+      { id: 4, status: 'available' },
+      { id: 5, status: 'available' },
+    ],
+    isConfirming: null,
+  });
 
-  const [id, setId] = useState(null)
-  const [customerCounts, setCustomerCounts] = useState({}); 
-  // const [ordersummary,setOrdersummary] = useState({});
-  const [menu,setMenu] = useState({});
-  const [clicked,setClicked] = useState({});
-  const tablesing = [
-    { id: 1 , status : 'available'},
-    { id: 2 , status : 'available'},
-    { id: 3 , status : 'available'},
-    { id: 4 , status : 'available'},
-    { id: 5 , status : 'available'},
-  ];
-  const [tables,setTables] = useState(tablesing);
-  const [isConfirming, setIsConfirming] = useState(null);
-  
+  const { id, customerCounts, menu, clicked, tables, isConfirming } = state;
 
-  function checkboxClicked (e){
-    setClicked((prev) => {
-      return{
-        ...prev,
-        [id]: e.target.checked
-      }
-    })
+  function checkboxClicked(e) {
+    setState((prev) => ({
+      ...prev,
+      clicked: {
+        ...prev.clicked,
+        [id]: e.target.checked,
+      },
+    }));
   }
 
-  
-
   function incrementMenuItem(tableId, item) {
-    setMenu((prev) => {
-      const existingOrder = prev[tableId] || []; 
-
-      // if (customerCounts[tableId] === 0) {
-      //   console.log(customerCounts[tableId])
-      //   return prev
-      // };
-  
+    setState((prev) => {
+      const existingOrder = prev.menu[tableId] || [];
       const updatedOrder = existingOrder.find((orderItem) => orderItem.id === item.id)
         ? existingOrder.map((orderItem) =>
-            orderItem.id === item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem
-          ) 
-        : [...existingOrder, { ...item, quantity: 1, status:"preparing" }]; 
-  
+            orderItem.id === item.id
+              ? { ...orderItem, quantity: orderItem.quantity + 1 }
+              : orderItem
+          )
+        : [...existingOrder, { ...item, quantity: 1, status: 'preparing' }];
+
       return {
         ...prev,
-        [tableId]: customerCounts[tableId] > 0 ? updatedOrder : [], 
+        menu: {
+          ...prev.menu,
+          [tableId]: prev.customerCounts[tableId] > 0 ? updatedOrder : [],
+        },
       };
     });
   }
 
   function decrementMenuItem(tableId, item) {
-    setMenu((prev) => {
-      const existingOrder = prev[tableId] || []; 
+    setState((prev) => {
+      const existingOrder = prev.menu[tableId] || [];
 
-      const updatedOrder = existingOrder.map((orderItem) =>
-        orderItem.id === item.id
-          ? { ...orderItem, quantity: orderItem.quantity - 1 }
-          : orderItem
-      );
-  
-      
-      const filteredOrder = updatedOrder.filter(orderItem => orderItem.quantity > 0);
-  
+      const updatedOrder = existingOrder
+        .map((orderItem) =>
+          orderItem.id === item.id
+            ? { ...orderItem, quantity: orderItem.quantity - 1 }
+            : orderItem
+        )
+        .filter((orderItem) => orderItem.quantity > 0);
+
       return {
         ...prev,
-        [tableId]: filteredOrder, 
+        menu: {
+          ...prev.menu,
+          [tableId]: updatedOrder,
+        },
       };
     });
   }
 
   function incrementCustomer(tableId) {
-    setCustomerCounts((prev) => {
-      const newCount = (prev[tableId] || 0) + 1; 
-  
-      if (newCount > 0) {
-        setTables((prevTables) =>
-          prevTables.map(t => (t.id === tableId ? { ...t, status: "occupied" } : t))
-        );
-      }
-    
+    setState((prev) => {
+      const newCount = (prev.customerCounts[tableId] || 0) + 1;
+
+      const newTables =
+        newCount > 0
+          ? prev.tables.map((t) =>
+              t.id === tableId ? { ...t, status: 'occupied' } : t
+            )
+          : prev.tables;
+
       return {
         ...prev,
-        [tableId]: newCount, 
+        customerCounts: {
+          ...prev.customerCounts,
+          [tableId]: newCount,
+        },
+        tables: newTables,
       };
     });
   }
 
   function decreaseCustomer(tableId) {
-    setCustomerCounts((prev) => {
-      const newCount = (prev[tableId] || 0) > 0 ? prev[tableId] - 1 : 0;
-    
-      if (newCount === 0) {
-        setTables((prevTables) =>
-          prevTables.map(t => (t.id === tableId ? { ...t, status: "available" } : t))
-        );
-      }
-    
+    setState((prev) => {
+      const newCount = (prev.customerCounts[tableId] || 0) > 0 ? prev.customerCounts[tableId] - 1 : 0;
+
+      const newTables =
+        newCount === 0
+          ? prev.tables.map((t) =>
+              t.id === tableId ? { ...t, status: 'available' } : t
+            )
+          : prev.tables;
+
       return {
         ...prev,
-        [tableId]: newCount,
+        customerCounts: {
+          ...prev.customerCounts,
+          [tableId]: newCount,
+        },
+        tables: newTables,
       };
     });
-
   }
 
-  function changeStatus(iding) {
-    setMenu((prev) => ({
-      ...prev, 
-      [id]: prev[id].map(i => 
-        i.id === iding ? { ...i, status: "ready" } : i
-      ) 
+  function changeStatus(itemId) {
+    setState((prev) => ({
+      ...prev,
+      menu: {
+        ...prev.menu,
+        [id]: prev.menu[id].map((i) =>
+          i.id === itemId ? { ...i, status: 'ready' } : i
+        ),
+      },
     }));
   }
- 
-  function confirmingState(){
-    setIsConfirming(id)
+
+  function confirmingState() {
+    setState((prev) => ({
+      ...prev,
+      isConfirming: id,
+    }));
   }
-  
-  function reset(){
-    setCustomerCounts((counts) => ({
-      ...counts,
-      [id] : 0
-    }))
-    setMenu((menuing) => ({
-      ...menuing,
-      [id] : []
-    }))
-    setTables((prev) => 
-      prev.map(table => 
-        table.id === id ? { ...table, status: "available" } : table
-      )
-    );
-    setIsConfirming(null)
+
+  function reset() {
+    setState((prev) => ({
+      ...prev,
+      customerCounts: {
+        ...prev.customerCounts,
+        [id]: 0,
+      },
+      menu: {
+        ...prev.menu,
+        [id]: [],
+      },
+      tables: prev.tables.map((t) =>
+        t.id === id ? { ...t, status: 'available' } : t
+      ),
+      isConfirming: null,
+    }));
   }
-  
-  function cancel (){
-    setIsConfirming(null)
+
+  function cancel() {
+    setState((prev) => ({
+      ...prev,
+      isConfirming: null,
+    }));
   }
-  
-  useEffect(() => {
-    const currenItem = menu[id] || [];
-    const currentCustomer = customerCounts[id]
-  
-    if (currenItem.length > 0 && currentCustomer > 0) {
-      const hasPreparingItems = currenItem.some(item => item.status === 'preparing');
-  
-      setTables((tables) =>
-        tables.map((table) =>
-          table.id === id
-            ? { ...table, status: hasPreparingItems  ? "occupied" : "waiting for bill" }
-            : table
-        )
-      );
-    }
-  }, [menu, id]); 
 
 
   useEffect(() => {
@@ -178,40 +177,59 @@ function App() {
   }, [isConfirming]);
 
   return (
-    <main className={`container`}>
+    <main className="container">
       <section className="tables-section">
-        <TableList tables={tables} setId={setId} setIsConfirming={setIsConfirming} customerCount={customerCounts} />
+        <TableList
+          tables={tables}
+          setId={(newId) => setState((prev) => ({ ...prev, id: newId }))}
+          setIsConfirming={(val) => setState((prev) => ({ ...prev, isConfirming: val }))}
+          customerCount={customerCounts}
+        />
       </section>
 
-    
       <section className="details-section">
-        {id && (
+        
           <>
-          <TableDetails
-            id={id}
-            customerCount={customerCounts[id] || 0}
-            increment={() => incrementCustomer(id)}
-            decrement={()=> decreaseCustomer(id)}
-            checkboxClicked={(e) => checkboxClicked(e)}
-            clicked={clicked[id] || false}
-          />
-          {/* <Checkbox checkboxClicked={(e) => checkboxClicked(e)} clicked={clicked[id] || false}/> */}
-          <section className="order-container">
-            <div className='menu_and_button'>
-              <Menu menuItems={menuItems} incrementMenuItem={(item) => incrementMenuItem(id, item)} menu={menu[id] || []} decrementMenuItem={(item) => decrementMenuItem(id, item)} />
-              <PaidButton item={menu[id]} isConfirming={isConfirming} confirmingState={confirmingState} reset={reset} cancel={cancel}/>
-            </div>
-            <section className="summary-prep-container">
-              <Summary item={menu[id]} changeStatus={(iding) => changeStatus(iding)} clicked={clicked[id] || false}/>
-              <Prepitems item={menu}/>
+            <TableDetails
+              id={id}
+              customerCount={customerCounts[id] || 0}
+              increment={() => incrementCustomer(id)}
+              decrement={() => decreaseCustomer(id)}
+              checkboxClicked={checkboxClicked}
+              clicked={clicked[id] || false}
+            />
+
+            <section className="order-container">
+              <div className="menu_and_button">
+                <Menu
+                  menuItems={menuItems}
+                  incrementMenuItem={(item) => incrementMenuItem(id, item)}
+                  menu={menu[id] || []}
+                  decrementMenuItem={(item) => decrementMenuItem(id, item)}
+                />
+                <PaidButton
+                  item={menu[id]}
+                  isConfirming={isConfirming}
+                  confirmingState={confirmingState}
+                  reset={reset}
+                  cancel={cancel}
+                />
+              </div>
+
+              <section className="summary-prep-container">
+                <Summary
+                  item={menu[id]}
+                  changeStatus={changeStatus}
+                  clicked={clicked[id] || false}
+                />
+                <Prepitems item={menu} />
+              </section>
             </section>
-          </section>
           </>
-        )}
+        
       </section>
     </main>
- 
-  )
+  );
 }
 
-export default App
+export default App;
